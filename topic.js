@@ -7,8 +7,8 @@ async function run() {
   try {
     // Establish TCP connection
     const kafka = new Kafka({
-      clientId: CLIENT_ID,
-      brokers: [KAFKA_CONNECTION],
+      clientId: process.env.CLIENT_ID,
+      brokers: [process.env.KAFKA_CONNECTION],
     });
 
     // Create admin
@@ -21,7 +21,12 @@ async function run() {
 
     // Create topics
     await admin.createTopics({
-      topics: [{ topic: TOPIC_NAME, numPartitions: NUM_PARTITIONS }],
+      topics: [
+        {
+          topic: process.env.TOPIC_NAME,
+          numPartitions: process.env.NUM_PARTITIONS,
+        },
+      ],
     });
     console.log('Toipcs created successfully');
 
